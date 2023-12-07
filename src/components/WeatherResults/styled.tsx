@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 interface IHourPercentContainer {
   percentage: number;
@@ -20,8 +20,70 @@ export const MainContainer = styled.main`
   );
 `;
 
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export const NameAppIcon = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  z-index: 1;
+
+  img {
+    width: 30px;
+    animation: ${rotate} 5s linear infinite;
+  }
+
+  h3 {
+    margin: 0;
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 100;
+    letter-spacing: 0.2rem;
+  }
+`;
+
+export const FormSelectCountry = styled.form`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: -10px;
+
+  input {
+    padding: 10px;
+    padding-left: 38px;
+    background: white;
+    outline: none;
+    font-size: 1.6rem;
+    border: 0;
+    border-radius: 20px;
+    transition: 0.2s;
+
+    &:focus {
+      box-shadow: 0 0 10px 1400px rgba(0, 0, 0, 0.3);
+      outline: none;
+    }
+  }
+
+  .icon-search {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    bottom: 6px;
+    left: 10px;
+    color: grey;
+  }
+`;
+
 export const NameLocation = styled.header`
-  margin-top: 12px;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -40,7 +102,7 @@ export const NameLocation = styled.header`
     }
 
     span {
-      color: #afabab;
+      color: lightslategray;
       font-size: 1.6rem;
     }
   }
@@ -57,7 +119,7 @@ export const WeatherLocation = styled.section`
   align-items: center;
   justify-content: space-between;
   color: white;
-  border-bottom: 1px solid #afabab;
+  border-bottom: 1px solid lightslategray;
   padding-bottom: 24px;
 
   div {
@@ -80,7 +142,7 @@ export const WeatherLocation = styled.section`
     p {
       width: 100%;
       margin: 0;
-      font-size: 1.9rem;
+      font-size: 1.8rem;
       font-weight: 100;
       text-align: end;
     }
@@ -128,6 +190,22 @@ export const SunriseSunsetContainer = styled.section`
   flex-direction: column;
   gap: 20px;
 
+  .wrapped {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    @media (min-width: 600px) {
+      flex-direction: row;
+      flex-wrap: nowrap;
+    }
+
+    @media (min-width: 930px) {
+      flex-direction: column;
+      width: auto;
+    }
+  }
+
   h3 {
     font-size: 1.8rem;
     color: white;
@@ -137,6 +215,7 @@ export const SunriseSunsetContainer = styled.section`
 `;
 
 export const SunriseSunset = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -145,13 +224,17 @@ export const SunriseSunset = styled.div`
   border: 2px solid #3081d0;
   border-radius: 8px;
 
+  @media (min-width: 930px) {
+    width: auto;
+  }
+
   div {
     display: flex;
     gap: 8px;
 
     img {
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
     }
     .container {
       display: flex;

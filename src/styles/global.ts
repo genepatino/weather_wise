@@ -29,11 +29,16 @@ export const GlobalStyle = createGlobalStyle`
       margin: 0;
       padding: 0;
       box-sizing:border-box;
-      font-family: sans-serif;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
   };
 
   html{
     font-size: 62.5%;
+    font-family: sans-serif;
   }
 `
 export const FlexContainer = styled.div<IFlexContainer>`
