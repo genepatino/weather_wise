@@ -9,5 +9,6 @@ export const Wrapper = styled.div`
 
   @media (min-width: 930px) {
     flex-direction: row;
+    border-radius: 8px;
   }
 `;
