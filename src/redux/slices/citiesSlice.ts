@@ -2,67 +2,77 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 /* import type { PayloadAction } from '@reduxjs/toolkit' */
 
 // Define a type for the slice state
-interface ICities {
+interface ICity {
   id: number,
   name: string,
   sys: {
     country: string,
+    sunrise: number,
+    sunset: number
   },
   main: {
-    temp: number
+    temp: number,
+    humidity: number,
+    pressure: number,
   },
   weather: [{
     description: string
-  }]
+  }],
+  wind: {
+    speed: number
+  }
 }
 
 
 // Define the initial state using that type
-const initialState: ICities[] = []
+const initialState: ICity = {
+  id: 0,
+  name: "Bogota",
+  sys: {
+    country: "CO",
+    sunrise: 0,
+    sunset: 0
+  },
+  main: {
+    temp: 290.88,
+    humidity: 44,
+    pressure: 1027,
+  },
+  weather: [
+    {
+      description: "Few clouds"
+    }
+  ],
+  wind: {
+    speed: 2.28
+  }
+}
+
 
 export const citySlice = createSlice({
   name: 'city',
   initialState,
   reducers: {
 
-    saveCity: (state, action: PayloadAction<ICities>) => {
-      state.push(action.payload)
-      state.length > 1 ? state.shift() : null
+    saveCity: (state, action: PayloadAction<ICity>) => {
+      const { id, name, sys, main, weather, wind } = action.payload
+      state.id = id,
+        state.name = name,
+        state.sys = sys,
+        state.main = main,
+        state.weather = weather,
+        state.wind = wind
+
     },
 
-    convertTemperature: (state, action) => {
-
+    setTemperature: (state, action) => {
+      state.main.temp = action.payload
     }
+
     // Use the PayloadAction type to declare the contents of `action.payload`
 
   },
 })
 
-export const { saveCity, convertTemperature } = citySlice.actions
+export const { saveCity, setTemperature } = citySlice.actions
 export default citySlice.reducer
-
-
-/* const initialState = {
-  name: "",
-  username: "",
-  email: ""
-}
-
-export const userSlice = createSlice({
-  name: "user", //nombre de la porcion a la que queremos acceder desde los componentes para modificar su estado
-  initialState,
-  reducers: { //acciones que van a modificar el estado
-    addUser: (state, action) => {
-      const { name, username, email } = action.payload;//datos que nos llegan desde en payload de la accion que despachamos en un componente
-      state.name = name
-      state.username = username
-      state.email = email
-    },
-    changeEmail: (state, action) => {
-      state.email = action.payload
-    }
-  }
-})
-
-export const { addUser, changeEmail } = userSlice.actions
-export default userSlice.reducer */

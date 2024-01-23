@@ -54,6 +54,7 @@ function SearchCity() {
         `${API_WEATHER}?lat=${city.latitude}&lon=${city.longitude}&appid=${API_KEY}`
       );
       const data = await response.json();
+      console.log({ data });
       dispatch(saveCity(data));
       setAllCitiesBySearch([]);
     } catch (error) {
@@ -64,7 +65,9 @@ function SearchCity() {
   return (
     <div>
       <FormSelectCity
-        $displayCities={allCitiesBySearch?.length > 0 && citySelect?.length < 1}
+        $displayCities={
+          allCitiesBySearch?.length > 0 && Object.entries(citySelect).length > 1
+        }
         onSubmit={(e) => e.preventDefault()}
       >
         <input
