@@ -17,8 +17,6 @@ function NameandWeatherLocation() {
       : `${(((temperatureInKelvin - 273.15) * 9) / 5 + 32).toFixed()}ºF`;
   }
 
-  console.log(metricUnitOfTemperature);
-
   const currenTime = new Date().toTimeString().slice(0, 5);
   let timeFormat;
 
