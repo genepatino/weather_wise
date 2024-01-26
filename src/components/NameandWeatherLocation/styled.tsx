@@ -63,5 +63,9 @@ export const WeatherLocation = styled.section`
       font-weight: 100;
       text-align: end;
     }
+
+    p::first-letter {
+      text-transform: uppercase;
+    }
   }
 `;

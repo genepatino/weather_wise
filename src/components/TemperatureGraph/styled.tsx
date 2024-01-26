@@ -30,7 +30,8 @@ export const Graph = styled.section`
     display: flex;
     justify-content: center;
     img {
-      width: 80%;
+      width: 100%;
+      object-fit: cover;
     }
   }
 `;

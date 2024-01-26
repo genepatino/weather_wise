@@ -3,11 +3,21 @@ import { NameLocation, WeatherLocation } from "./styled";
 import climaIcon from "../../images/clima.png";
 
 function NameandWeatherLocation() {
-  const cityByUser = useAppSelector((state) => state.city);
-  const tempToString = cityByUser.main.temp.toString();
+  const cityData = useAppSelector((state) => state.city);
+  const descriptionWeather = cityData.weather.map((item) => item.description);
+  const temperatureInKelvin = cityData.main.temp;
+  const metricUnitOfTemperature = useAppSelector(
+    (state) => state.temperatureUnits.isFahrenheitTrue
+  );
 
-  const weatherClouds = cityByUser.weather.map((e) => e.description).toString();
-  const kelvinToCelsius = (cityByUser.main.temp - 273.15).toFixed();
+  let temperature;
+  if (temperatureInKelvin > 0) {
+    temperature = metricUnitOfTemperature
+      ? `${(temperatureInKelvin - 273.15).toFixed()}ºC`
+      : `${(((temperatureInKelvin - 273.15) * 9) / 5 + 32).toFixed()}ºF`;
+  }
+
+  console.log(metricUnitOfTemperature);
 
   const currenTime = new Date().toTimeString().slice(0, 5);
   let timeFormat;
@@ -21,10 +31,10 @@ function NameandWeatherLocation() {
   return (
     <>
       <NameLocation>
-        {cityByUser.name && cityByUser.sys ? (
-          <div key={cityByUser.id}>
-            <h3>{cityByUser.name}</h3>
-            <span>{cityByUser.sys.country}</span>
+        {cityData.name && cityData.sys ? (
+          <div key={cityData.id}>
+            <h3>{cityData.name}</h3>
+            <span>{cityData.sys.country}</span>
           </div>
         ) : (
           <div>
@@ -34,34 +44,15 @@ function NameandWeatherLocation() {
         )}
         <p>{timeFormat}</p>
       </NameLocation>
-      {Object.entries(cityByUser).length > 1 ? (
-        <WeatherLocation key={cityByUser.id}>
-          <div>
-            <img src={climaIcon} alt="" />
-            {tempToString.length > 2 ? (
-              <span>{`${kelvinToCelsius}ºC`}</span>
-            ) : (
-              <span>{`${cityByUser.main.temp}ºF`}</span>
-            )}
-          </div>
-          <div>
-            <p>
-              {weatherClouds.charAt(0).toUpperCase() +
-                weatherClouds.substring(1)}
-            </p>
-          </div>
-        </WeatherLocation>
-      ) : (
-        <WeatherLocation>
-          <div>
-            <img src={climaIcon} alt="" />
-            <span>24ºC</span>
-          </div>
-          <div>
-            <p>Broken clouds</p>
-          </div>
-        </WeatherLocation>
-      )}
+      <WeatherLocation>
+        <div>
+          <img src={climaIcon} alt="" />
+          <span>{temperature}</span>
+        </div>
+        <div>
+          <p>{descriptionWeather}</p>
+        </div>
+      </WeatherLocation>
     </>
   );
 }

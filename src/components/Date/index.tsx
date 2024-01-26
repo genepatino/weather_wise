@@ -1,34 +1,28 @@
-import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { setTemperature } from "../../redux/slices/citiesSlice";
+import { modifyMetricUnitChange } from "../../redux/slices/temperatureUnitsSlice";
+import Switch from "react-switch";
+
 import { DateContainer } from "./styled";
+import { RiFahrenheitLine, RiCelsiusLine } from "react-icons/ri";
 
 function DateToday() {
-  const [disabledFahrenheit, setDisabledFahrenheit] = useState(false);
-  const [disabledCelsius, setDisabledCelsius] = useState(false);
-  const temperatureByCity = useAppSelector((state) => state.city.main.temp);
+  const metricUnitOfTemperature = useAppSelector(
+    (state) => state.temperatureUnits.isFahrenheitTrue
+  );
+
   const dispatch = useAppDispatch();
 
-  const setTemperatureFahrenheit = () => {
-    const kelvinToFahrenheit = (
-      ((temperatureByCity - 273.15) * 9) / 5 +
-      32
-    ).toFixed();
-    dispatch(setTemperature(kelvinToFahrenheit));
-    setDisabledFahrenheit(true);
+  const handleChange = () => {
+    dispatch(modifyMetricUnitChange());
   };
 
-  const setTemperatureCelsius = () => {
-    const fahrenheitToCelsius = (((temperatureByCity - 32) * 5) / 9).toFixed();
-    dispatch(setTemperature(fahrenheitToCelsius));
-    setDisabledCelsius(true);
-  };
   const date = new Date().toString();
   const today = `${date.slice(0, 3)}, ${date.slice(4, 10)}, ${date.slice(
     11,
     15
   )}`;
   const dayYear = `${date.slice(0, 3)}, ${date.slice(11, 15)}`;
+
   return (
     <DateContainer>
       <div className="conteinerDate">
@@ -36,15 +30,18 @@ function DateToday() {
         <span className="specificDate">{today}</span>
       </div>
       <div className="temperatureButton">
-        <button onClick={setTemperatureCelsius} disabled={disabledCelsius}>
-          Convertir a ºC
-        </button>
-        <button
-          onClick={setTemperatureFahrenheit}
-          disabled={disabledFahrenheit}
-        >
-          Convertir a ºF
-        </button>
+        <label>
+          <Switch
+            onChange={handleChange}
+            checked={metricUnitOfTemperature}
+            onColor="#3498DB"
+            offColor="#bcc3cc"
+            offHandleColor="#3498DB"
+            uncheckedIcon={<RiFahrenheitLine className="fahrenheitIcon" />}
+            checkedIcon={<RiCelsiusLine className="celsiusIcon" />}
+            width={60}
+          />
+        </label>
       </div>
     </DateContainer>
   );
