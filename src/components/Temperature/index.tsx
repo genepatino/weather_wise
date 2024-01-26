@@ -7,40 +7,51 @@ function Temperature() {
     );
   };
 
-  const changeRain1 = randomRainChange(10, 100);
-  const changeRain2 = randomRainChange(10, 100);
-  const changeRain3 = randomRainChange(10, 100);
-  const changeRain4 = randomRainChange(10, 100);
+  const rainShiftBar1 = randomRainChange(10, 100);
+  const rainShiftBar2 = randomRainChange(10, 100);
+  const rainShiftBar3 = randomRainChange(10, 100);
+  const rainShiftBar4 = randomRainChange(10, 100);
+
+  const currenTime = new Date().toTimeString().slice(0, 2);
+
+  const randomHour1 = randomRainChange(
+    Number(currenTime),
+    Number(currenTime) + 1
+  );
+  const randomHour2 = randomRainChange(randomHour1 + 1, randomHour1 + 1);
+  const randomHour3 = randomRainChange(randomHour2 + 1, randomHour2 + 1);
+  const randomHour4 = randomRainChange(randomHour3 + 1, randomHour3 + 1);
+
   return (
     <TemperaturePercentage>
       <h3>Change of rain</h3>
-      <HourPercentContainer percentage={changeRain1}>
-        <span>7 PM</span>
+      <HourPercentContainer percentage={rainShiftBar1}>
+        <span>{randomHour1 > 12 ? randomHour1 + " PM" : " AM"}</span>
         <div>
           <div></div>
         </div>
-        <span>{changeRain1}%</span>
+        <span>{rainShiftBar1}%</span>
       </HourPercentContainer>
-      <HourPercentContainer percentage={changeRain2}>
-        <span>8 PM</span>
+      <HourPercentContainer percentage={rainShiftBar2}>
+        <span>{randomHour2 > 12 ? randomHour2 + " PM" : " AM"}</span>
         <div>
           <div></div>
         </div>
-        <span>{changeRain2}%</span>
+        <span>{rainShiftBar2}%</span>
       </HourPercentContainer>
-      <HourPercentContainer percentage={changeRain3}>
-        <span>9 PM</span>
+      <HourPercentContainer percentage={rainShiftBar3}>
+        <span>{randomHour3 > 12 ? randomHour3 + " PM" : " AM"}</span>
         <div>
           <div></div>
         </div>
-        <span>{changeRain3}%</span>
+        <span>{rainShiftBar3}%</span>
       </HourPercentContainer>
-      <HourPercentContainer percentage={changeRain4}>
-        <span>10 PM</span>
+      <HourPercentContainer percentage={rainShiftBar4}>
+        <span>{randomHour4 > 12 ? randomHour4 + " PM" : " AM"}</span>
         <div>
           <div></div>
         </div>
-        <span>{changeRain4}%</span>
+        <span>{rainShiftBar4}%</span>
       </HourPercentContainer>
     </TemperaturePercentage>
   );

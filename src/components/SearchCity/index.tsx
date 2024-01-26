@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppDispatch } from "../../redux/hooks";
 import { FormSelectCity, RenderAllCitiesBySearch } from "./styled";
 import { RiSearch2Line } from "react-icons/ri";
 import { saveCity } from "../../redux/slices/citiesSlice";
+import { MessageError } from "../MessageError";
 import {
   API_URL_GEO_CITIES,
   API_WEATHER,
@@ -21,10 +22,31 @@ interface ICities {
 
 function SearchCity() {
   const [search, setSearch] = useState("");
-  const [allCitiesBySearch, setAllCitiesBySearch] = useState<ICities[]>([]);
-
-  const citySelect = useAppSelector((state) => state.city);
+  const [cityEnteredByUser, setCityEnteredByUser] = useState<ICities[]>([]);
+  const [showCitiesContainer, setShowCitiesContainer] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
   const dispatch = useAppDispatch();
+
+  const getUserLocationByIP = async () => {
+    const reponse = await fetch("https://api.ipify.org?format=json");
+    const data = await reponse.json();
+    const { ip } = data;
+
+    fetch(`http://ip-api.com/json/${ip}?fields=status,message,lat,lon`)
+      .then((response) => response.json())
+      .then((data) => {
+        const { lat, lon } = data;
+        fetch(`${API_WEATHER}?lat=${lat}&lon=${lon}&appid=${API_KEY}`)
+          .then((response) => response.json())
+          .then((locationByIP) => {
+            dispatch(saveCity(locationByIP));
+          });
+      });
+  };
+
+  useEffect(() => {
+    getUserLocationByIP();
+  }, []);
 
   const getCity = async () => {
     if (search !== "") {
@@ -33,8 +55,15 @@ function SearchCity() {
           `${API_URL_GEO_CITIES}/cities?minPopulation=50000&namePrefix=${search}`,
           GEO_Options
         );
+        console.log(response);
         const data = await response.json();
-        setAllCitiesBySearch(data.data);
+        if (data.data.length > 0) {
+          setCityEnteredByUser(data.data);
+          setShowCitiesContainer(true);
+          setErrorMessage(false);
+        } else {
+          setErrorMessage(true);
+        }
       } catch (error) {
         console.log("no se ha podido realizar la consulta");
       }
@@ -44,7 +73,8 @@ function SearchCity() {
   useEffect(() => {
     const getData = setTimeout(() => {
       getCity();
-    }, 1000);
+    }, 900);
+
     return () => clearTimeout(getData);
   }, [search]);
 
@@ -54,9 +84,8 @@ function SearchCity() {
         `${API_WEATHER}?lat=${city.latitude}&lon=${city.longitude}&appid=${API_KEY}`
       );
       const data = await response.json();
-      console.log({ data });
       dispatch(saveCity(data));
-      setAllCitiesBySearch([]);
+      setShowCitiesContainer(false);
     } catch (error) {
       console.log("no se ha podido realizar la consulta");
     }
@@ -65,9 +94,7 @@ function SearchCity() {
   return (
     <div>
       <FormSelectCity
-        $displayCities={
-          allCitiesBySearch?.length > 0 && Object.entries(citySelect).length > 1
-        }
+        $displayCitiesContainer={showCitiesContainer}
         onSubmit={(e) => e.preventDefault()}
       >
         <input
@@ -78,10 +105,11 @@ function SearchCity() {
         />
         <RiSearch2Line className="icon-search" />
       </FormSelectCity>
-      {allCitiesBySearch.length > 0 && (
-        <RenderAllCitiesBySearch>
+      {errorMessage && <MessageError />}
+      {cityEnteredByUser.length > 0 && (
+        <RenderAllCitiesBySearch $displayCitiesContainer={showCitiesContainer}>
           <ul>
-            {allCitiesBySearch.map((city) => (
+            {cityEnteredByUser.map((city) => (
               <li
                 key={city.id}
                 className="list-container"

@@ -22,6 +22,22 @@ export const DateContainer = styled.header`
     }
   }
 
+  .fahrenheitIcon {
+    font-size: 20px;
+    position: absolute;
+    right: 6px;
+    top: 4px;
+    color: #173660;
+  }
+
+  .celsiusIcon {
+    font-size: 20px;
+    position: absolute;
+    left: 6px;
+    top: 4px;
+    color: #173660;
+  }
+
   .temperatureButton {
     display: flex;
     height: 30px;

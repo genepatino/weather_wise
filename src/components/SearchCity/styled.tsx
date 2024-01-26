@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const FormSelectCity = styled.form<{ $displayCities?: boolean }>`
+export const FormSelectCity = styled.form<{
+  $displayCitiesContainer?: boolean;
+}>`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -12,9 +14,10 @@ export const FormSelectCity = styled.form<{ $displayCities?: boolean }>`
     padding-left: 38px;
     background: white;
     border-radius: 8px;
-    border-bottom-left-radius: ${(props) => (props.$displayCities ? 0 : "8px")};
+    border-bottom-left-radius: ${(props) =>
+      props.$displayCitiesContainer ? 0 : "8px"};
     border-bottom-right-radius: ${(props) =>
-      props.$displayCities ? 0 : "8px"};
+      props.$displayCitiesContainer ? 0 : "8px"};
     outline: none;
     font-size: 1.6rem;
     border: 0;
@@ -36,7 +39,9 @@ export const FormSelectCity = styled.form<{ $displayCities?: boolean }>`
   }
 `;
 
-export const RenderAllCitiesBySearch = styled.div<{ $displayCities?: boolean }>`
+export const RenderAllCitiesBySearch = styled.div<{
+  $displayCitiesContainer: boolean;
+}>`
   background-color: white;
   z-index: 2;
   position: relative;
@@ -44,7 +49,7 @@ export const RenderAllCitiesBySearch = styled.div<{ $displayCities?: boolean }>`
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   padding-bottom: 10px;
-  display: flex;
+  display: ${(prosp) => (prosp.$displayCitiesContainer ? "flex" : "none")};
   flex-direction: column;
   gap: 8px;
 

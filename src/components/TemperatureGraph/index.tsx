@@ -1,15 +1,20 @@
 import { Graph } from "./styled";
-import tempetatureGraph from "../../images/graficaTemperature.png";
+import { useAppSelector } from "../../redux/hooks";
+import graficaGlobalLandAndOcean from "../../images/graficaGlobalLandAndOcean.svg";
 
 function TemperatureGraph() {
+  const cityData = useAppSelector((state) => state.city);
+
   return (
     <Graph>
       <header>
         <h3>Hourly forecast</h3>
-        <p>Tegal, Indonesia</p>
+        <p>
+          {cityData.name}, {cityData.sys.country}
+        </p>
       </header>
       <figure>
-        <img src={tempetatureGraph} alt="" />
+        <img src={graficaGlobalLandAndOcean} alt="" />
       </figure>
     </Graph>
   );
