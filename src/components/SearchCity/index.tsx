@@ -4,6 +4,7 @@ import { FormSelectCity, RenderAllCitiesBySearch } from "./styled";
 import { RiSearch2Line } from "react-icons/ri";
 import { saveCity } from "../../redux/slices/citiesSlice";
 import { MessageError } from "../MessageError";
+import { STORAGECITYDATA } from "../../utils/consts";
 import {
   API_URL_GEO_CITIES,
   API_WEATHER,
@@ -45,7 +46,11 @@ function SearchCity() {
   };
 
   useEffect(() => {
-    getUserLocationByIP();
+    const cityDatasavedInSstorage =
+      window.localStorage.getItem(STORAGECITYDATA);
+    cityDatasavedInSstorage
+      ? dispatch(saveCity(JSON.parse(cityDatasavedInSstorage)))
+      : getUserLocationByIP();
   }, []);
 
   const getCity = async () => {
@@ -86,6 +91,7 @@ function SearchCity() {
       const data = await response.json();
       dispatch(saveCity(data));
       setShowCitiesContainer(false);
+      window.localStorage.setItem(STORAGECITYDATA, JSON.stringify(data));
     } catch (error) {
       console.log("no se ha podido realizar la consulta");
     }
