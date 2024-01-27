@@ -1,5 +1,5 @@
 import { MainContainer } from "./styled";
-import { DateToday } from "../Date";
+import { DateToday } from "../DateToday";
 import { Weather } from "../Weather";
 import { TemperatureGraph } from "../TemperatureGraph";
 

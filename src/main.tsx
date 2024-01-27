@@ -5,7 +5,6 @@ import { I18nextProvider } from "react-i18next";
 import i18next from "i18next";
 import global_es from "./translations/es/global.json";
 import global_en from "./translations/en/global.json";
-import global_pt_br from "./translations/pt-br/global.json";
 import { store } from "./redux/store.ts";
 import { Provider } from "react-redux";
 
@@ -18,9 +17,6 @@ i18next.init({
     },
     en: {
       global: global_en,
-    },
-    pt_br: {
-      global: global_pt_br,
     },
   },
 });

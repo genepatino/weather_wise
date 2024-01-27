@@ -1,13 +1,16 @@
 import { ErrorMessageContainer } from "./styled";
 import { RiErrorWarningLine } from "react-icons/ri";
+import { useTranslation } from "react-i18next";
 
 function MessageError() {
+  const [t] = useTranslation("global");
   return (
     <ErrorMessageContainer>
       <RiErrorWarningLine className="errorMessageIcon" />
       <span className="errorMessage">
-        No hemos encontrado una ciudad
-        <br /> que coincida con tu búsqueda.
+        {t("weatherResult.message-error.first")}
+        <br />
+        {t("weatherResult.message-error.second")}
       </span>
     </ErrorMessageContainer>
   );

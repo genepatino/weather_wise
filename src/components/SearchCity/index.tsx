@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../redux/hooks";
 import { FormSelectCity, RenderAllCitiesBySearch } from "./styled";
 import { RiSearch2Line } from "react-icons/ri";
-import { saveCity } from "../../redux/slices/citiesSlice";
+import { saveCity, setLoadingFalse } from "../../redux/slices/weatherDataSlice";
 import { MessageError } from "../MessageError";
 import { STORAGECITYDATA } from "../../utils/consts";
 import {
@@ -51,6 +51,7 @@ function SearchCity() {
     cityDatasavedInSstorage
       ? dispatch(saveCity(JSON.parse(cityDatasavedInSstorage)))
       : getUserLocationByIP();
+    dispatch(setLoadingFalse());
   }, []);
 
   const getCity = async () => {
@@ -60,7 +61,6 @@ function SearchCity() {
           `${API_URL_GEO_CITIES}/cities?minPopulation=50000&namePrefix=${search}`,
           GEO_Options
         );
-        console.log(response);
         const data = await response.json();
         if (data.data.length > 0) {
           setCityEnteredByUser(data.data);

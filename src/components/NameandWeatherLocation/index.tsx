@@ -1,13 +1,15 @@
 import { useAppSelector } from "../../redux/hooks";
+import { LoadingSkeleton } from "../LoadingSkeleton";
 import { NameLocation, WeatherLocation } from "./styled";
 import climaIcon from "../../images/clima.png";
 
 function NameandWeatherLocation() {
-  const cityData = useAppSelector((state) => state.city);
+  const cityData = useAppSelector((state) => state.weatherData.cityData);
+  const loading = useAppSelector((state) => state.weatherData.loading);
   const descriptionWeather = cityData.weather.map((item) => item.description);
   const temperatureInKelvin = cityData.main.temp;
   const metricUnitOfTemperature = useAppSelector(
-    (state) => state.temperatureUnits.isFahrenheitTrue
+    (state) => state.weatherData.isFahrenheitTrue
   );
 
   let temperature;
@@ -28,29 +30,30 @@ function NameandWeatherLocation() {
 
   return (
     <>
-      <NameLocation>
-        {cityData.name && cityData.sys ? (
-          <div key={cityData.id}>
-            <h3>{cityData.name}</h3>
-            <span>{cityData.sys.country}</span>
-          </div>
-        ) : (
-          <div>
-            <h3>Bogotá</h3>
-            <span>Colombia</span>
-          </div>
-        )}
-        <p>{timeFormat}</p>
-      </NameLocation>
-      <WeatherLocation>
-        <div>
-          <img src={climaIcon} alt="" />
-          <span>{temperature}</span>
-        </div>
-        <div>
-          <p>{descriptionWeather}</p>
-        </div>
-      </WeatherLocation>
+      {loading ? (
+        <LoadingSkeleton />
+      ) : (
+        <>
+          <NameLocation>
+            {cityData.name && cityData.sys && (
+              <div key={cityData.id}>
+                <h3>{cityData.name}</h3>
+                <span>{cityData.sys.country}</span>
+              </div>
+            )}
+            <p>{timeFormat}</p>
+          </NameLocation>
+          <WeatherLocation>
+            <div>
+              <img src={climaIcon} alt="" />
+              <span>{temperature}</span>
+            </div>
+            <div>
+              <p>{descriptionWeather}</p>
+            </div>
+          </WeatherLocation>
+        </>
+      )}
     </>
   );
 }

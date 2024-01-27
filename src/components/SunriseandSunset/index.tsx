@@ -2,90 +2,109 @@ import { SunriseSunset, SunriseSunsetContainer } from "./styled";
 import sunrise from "../../images/sol.png";
 import sunset from "../../images/amanecer.png";
 import { useAppSelector } from "../../redux/hooks";
+import { useTranslation } from "react-i18next";
+import { LoadingSkeleton } from "../LoadingSkeleton";
 
 function SunriseandSunset() {
-  const getSunrise = useAppSelector((state) => state.city.sys.sunrise);
-  const getSunsete = useAppSelector((state) => state.city.sys.sunset);
+  const [t] = useTranslation("global");
 
-  const timeSunrise = new Date(getSunrise * 1000).toTimeString().slice(0, 5);
-  const timeSunsete = new Date(getSunsete * 1000).toTimeString().slice(0, 5);
+  const getSunrise = useAppSelector(
+    (state) => state.weatherData.cityData.sys.sunrise
+  );
+  const getSunsete = useAppSelector(
+    (state) => state.weatherData.cityData.sys.sunset
+  );
+  const loading = useAppSelector((state) => state.weatherData.loading);
+
+  const timeSunrise =
+    getSunrise && new Date(getSunrise * 1000).toTimeString().slice(0, 5);
+  const timeSunsete =
+    getSunsete && new Date(getSunsete * 1000).toTimeString().slice(0, 5);
   const currenTime = new Date().toTimeString().slice(0, 5);
 
-  const hourSunrise = Number(timeSunrise.split(":")[0]);
-  const hourSunsete = Number(timeSunsete.split(":")[0]);
+  const hourSunrise = timeSunrise && Number(timeSunrise.split(":")[0]);
+  const hourSunsete = timeSunsete && Number(timeSunsete.split(":")[0]);
   const hourCurrenTimer = Number(currenTime.split(":")[0]);
 
-  const howLongAgoSunrise = hourCurrenTimer - hourSunrise;
-  const howLongDoesSunset = hourSunsete - hourCurrenTimer;
+  const howLongAgoSunrise = hourSunrise && hourCurrenTimer - hourSunrise;
+  const howLongDoesSunset = hourSunsete && hourSunsete - hourCurrenTimer;
 
   /* SUNSETE MESSAGE */
   let sunsetMessage;
   let complementSunsete;
 
-  if (Math.sign(howLongDoesSunset) === -1) {
+  if (howLongDoesSunset && Math.sign(howLongDoesSunset) === -1) {
     const positiveValue = howLongDoesSunset * -1;
     positiveValue > 1
-      ? (complementSunsete = "hours")
-      : (complementSunsete = "hour");
-    sunsetMessage = `${positiveValue} ${complementSunsete} ago`;
+      ? (complementSunsete = `${t("weatherResult.hours")}`)
+      : (complementSunsete = `${t("weatherResult.hour")}`);
+    sunsetMessage = `${t(
+      "weatherResult.ago"
+    )} ${positiveValue} ${complementSunsete}`;
   } else {
-    howLongDoesSunset > 1
-      ? (complementSunsete = "hours")
-      : (complementSunsete = "hour");
-    sunsetMessage = `in ${howLongDoesSunset} ${complementSunsete}`;
+    howLongDoesSunset && howLongDoesSunset > 1
+      ? (complementSunsete = `${t("weatherResult.hours")}`)
+      : (complementSunsete = `${t("weatherResult.hour")}`);
+    sunsetMessage = `${t(
+      "weatherResult.in"
+    )} ${howLongDoesSunset} ${complementSunsete}`;
   }
 
   /* SUNRISE MESSAGE*/
   let sunriseMessage;
   let complementSunrise;
 
-  if (Math.sign(howLongAgoSunrise) === -1) {
-    const positiveValue = howLongDoesSunset * -1;
-    positiveValue > 1
-      ? (complementSunsete = "hours")
-      : (complementSunsete = "hour");
+  if (howLongAgoSunrise && Math.sign(howLongAgoSunrise) === -1) {
+    const positiveValue = howLongDoesSunset && howLongDoesSunset * -1;
+    positiveValue && positiveValue > 1
+      ? (complementSunsete = `${t("weatherResult.hours")}`)
+      : (complementSunsete = `${t("weatherResult.hour")}`);
     sunriseMessage = `in ${positiveValue} ${complementSunrise}`;
   } else {
-    howLongAgoSunrise > 1
-      ? (complementSunrise = "hours")
-      : (complementSunrise = "hour");
-    sunriseMessage = `${howLongAgoSunrise} ${complementSunrise} ago`;
+    howLongAgoSunrise && howLongAgoSunrise > 1
+      ? (complementSunrise = `${t("weatherResult.hours")}`)
+      : (complementSunrise = `${t("weatherResult.hour")}`);
+    sunriseMessage = ` ${t(
+      "weatherResult.ago"
+    )} ${howLongAgoSunrise} ${complementSunrise}`;
   }
 
   return (
-    <SunriseSunsetContainer>
-      <h3>Sunrise & Sunset</h3>
-      <div className="wrapped">
-        <SunriseSunset>
-          <div>
-            <img src={sunrise} alt="" />
-            <div className="container">
-              <span className="sunrise">Sunrise</span>
-              {getSunrise > 0 ? (
-                <span className="hour">{timeSunrise + " AM"}</span>
-              ) : (
-                <span className="hour">{"06:10 AM"}</span>
-              )}
-            </div>
+    <>
+      {loading ? (
+        <LoadingSkeleton />
+      ) : (
+        <SunriseSunsetContainer>
+          <h3>{t("weatherResult.sunrise-sunset")}</h3>
+          <div className="wrapped">
+            <SunriseSunset>
+              <div>
+                <img src={sunrise} alt="" />
+                <div className="container">
+                  <span className="sunrise">{t("weatherResult.sunrise")}</span>
+                  {getSunrise && getSunrise > 0 && (
+                    <span className="hour">{timeSunrise + " AM"}</span>
+                  )}
+                </div>
+              </div>
+              <span className="then">{sunriseMessage}</span>
+            </SunriseSunset>
+            <SunriseSunset>
+              <div>
+                <img src={sunset} alt="" />
+                <div className="container">
+                  <span className="sunrise">{t("weatherResult.sunset")}</span>
+                  {getSunsete && getSunsete > 0 && (
+                    <span className="hour">{timeSunsete + " PM"}</span>
+                  )}
+                </div>
+              </div>
+              <span className="then">{sunsetMessage}</span>
+            </SunriseSunset>
           </div>
-          <span className="then">{sunriseMessage}</span>
-        </SunriseSunset>
-        <SunriseSunset>
-          <div>
-            <img src={sunset} alt="" />
-            <div className="container">
-              <span className="sunrise">Sunset</span>
-              {getSunsete > 0 ? (
-                <span className="hour">{timeSunsete + " PM"}</span>
-              ) : (
-                <span className="hour">{"18:04 PM"}</span>
-              )}
-            </div>
-          </div>
-          <span className="then">{sunsetMessage}</span>
-        </SunriseSunset>
-      </div>
-    </SunriseSunsetContainer>
+        </SunriseSunsetContainer>
+      )}
+    </>
   );
 }
 

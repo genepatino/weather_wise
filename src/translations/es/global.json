@@ -1,5 +1,26 @@
 {
-  "header": {
-    "hello-world": "Hola mundo"
+  "weatherResult": {
+    "rain-change-bar": "Variación de lluvia",
+    "sunrise-sunset": "Amanecer y Atardecer",
+    "sunrise": "Amanecer",
+    "sunset": "Atardecer",
+    "hours": "horas",
+    "hour": "hora",
+    "ago": "hace",
+    "in": "en",
+    "message-error": {
+      "first": "No hemos encontrado una ciudad",
+      "second": "que coincida con tu búsqueda."
+    }
+    
+  },
+
+  "weatherDetails":{
+    "today-overview": "Resumen de hoy",
+    "wind-speed": "Velocidad del viento",
+    "pressure": "Presión",
+    "rain-chance": "Probabilidad de lluvia",
+    "humidity": "Humedad",
+    "hourly-forecast": "Pronóstico por hora"
   }
 }

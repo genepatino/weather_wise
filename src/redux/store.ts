@@ -1,11 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { citySlice } from './slices/citiesSlice'
-import { temperatureUnitsSlice } from './slices/temperatureUnitsSlice'
+import { WeatherDataSlice } from './slices/weatherDataSlice'
 
 export const store = configureStore({
   reducer: {
-    city: citySlice.reducer,
-    temperatureUnits: temperatureUnitsSlice.reducer
+    weatherData: WeatherDataSlice.reducer,
   },
 })
 

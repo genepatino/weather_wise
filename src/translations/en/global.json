@@ -1,5 +1,25 @@
 {
-  "header": {
-    "hello-world": "Hello world"
+  "weatherResult": {
+    "rain-change-bar": "Rain variation",
+    "sunrise-sunset": "Sunrise and Sunset",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "hours": "hours",
+    "hour": "hour",
+    "ago": "ago",
+    "in": "in",
+    "message-error": {
+      "first": "We haven't found a city",
+      "second": "that matches your search."
+    }
+  },
+
+  "weatherDetails":{
+    "today-overview": "Today's Overview",
+    "wind-speed": "Wind speed",
+    "pressure": "Pressure",
+    "rain-chance": "Rain chance",
+    "humidity": "Humidity",
+    "hourly-forecast": "Hourly Forecast"
   }
 }

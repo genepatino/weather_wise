@@ -1,6 +1,9 @@
 import { TemperaturePercentage, HourPercentContainer } from "./styled";
+import { useTranslation } from "react-i18next";
 
 function Temperature() {
+  const [t] = useTranslation("global");
+
   const randomRainChange = (lowerLimit: number, upperLimit: number) => {
     return (
       Math.floor(Math.random() * (upperLimit - lowerLimit + 1)) + lowerLimit
@@ -24,7 +27,7 @@ function Temperature() {
 
   return (
     <TemperaturePercentage>
-      <h3>Change of rain</h3>
+      <h3>{t("weatherResult.rain-change-bar")}</h3>
       <HourPercentContainer percentage={rainShiftBar1}>
         <span>{randomHour1 > 12 ? randomHour1 + " PM" : " AM"}</span>
         <div>

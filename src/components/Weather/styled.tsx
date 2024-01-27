@@ -24,7 +24,7 @@ export const CardWeatherOverview = styled.div`
 
   .cardContainer {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 60px repeat(2, 1fr);
     width: 100%;
     background: #f7f7f7d4;
     border-radius: 8px;
