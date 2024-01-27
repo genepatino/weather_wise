@@ -4,10 +4,10 @@
     "sunrise-sunset": "Sunrise and Sunset",
     "sunrise": "Sunrise",
     "sunset": "Sunset",
-    "hours": "hours",
     "hour": "hour",
-    "ago": "ago",
-    "in": "in",
+    "hours": "hours",
+    "complmentMessageInSunriseSunset": "in {{hour}} {{hourOrhours}}",
+    "complmentMessageAgoSunriseSunset": "{{hour}} {{hourOrhours}} ago",
     "message-error": {
       "first": "We haven't found a city",
       "second": "that matches your search."

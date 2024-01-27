@@ -4,10 +4,10 @@
     "sunrise-sunset": "Amanecer y Atardecer",
     "sunrise": "Amanecer",
     "sunset": "Atardecer",
-    "hours": "horas",
     "hour": "hora",
-    "ago": "hace",
-    "in": "en",
+    "hours": "horas",
+    "complmentMessageInSunriseSunset": "en {{hour}} {{hourOrhours}}",
+    "complmentMessageAgoSunriseSunset": "hace {{hour}} {{hourOrhours}}",
     "message-error": {
       "first": "No hemos encontrado una ciudad",
       "second": "que coincida con tu búsqueda."

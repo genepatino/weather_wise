@@ -29,44 +29,51 @@ function SunriseandSunset() {
   const howLongAgoSunrise = hourSunrise && hourCurrenTimer - hourSunrise;
   const howLongDoesSunset = hourSunsete && hourSunsete - hourCurrenTimer;
 
-  /* SUNSETE MESSAGE */
-  let sunsetMessage;
-  let complementSunsete;
-
-  if (howLongDoesSunset && Math.sign(howLongDoesSunset) === -1) {
-    const positiveValue = howLongDoesSunset * -1;
-    positiveValue > 1
-      ? (complementSunsete = `${t("weatherResult.hours")}`)
-      : (complementSunsete = `${t("weatherResult.hour")}`);
-    sunsetMessage = `${t(
-      "weatherResult.ago"
-    )} ${positiveValue} ${complementSunsete}`;
-  } else {
-    howLongDoesSunset && howLongDoesSunset > 1
-      ? (complementSunsete = `${t("weatherResult.hours")}`)
-      : (complementSunsete = `${t("weatherResult.hour")}`);
-    sunsetMessage = `${t(
-      "weatherResult.in"
-    )} ${howLongDoesSunset} ${complementSunsete}`;
-  }
-
   /* SUNRISE MESSAGE*/
   let sunriseMessage;
-  let complementSunrise;
+  let valueHoursOrhour;
 
   if (howLongAgoSunrise && Math.sign(howLongAgoSunrise) === -1) {
-    const positiveValue = howLongDoesSunset && howLongDoesSunset * -1;
-    positiveValue && positiveValue > 1
-      ? (complementSunsete = `${t("weatherResult.hours")}`)
-      : (complementSunsete = `${t("weatherResult.hour")}`);
-    sunriseMessage = `in ${positiveValue} ${complementSunrise}`;
+    const positiveHowLongAgoSunrise =
+      howLongDoesSunset && howLongDoesSunset * -1;
+    positiveHowLongAgoSunrise && positiveHowLongAgoSunrise > 1
+      ? (valueHoursOrhour = `${t("weatherResult.hours")}`)
+      : (valueHoursOrhour = `${t("weatherResult.hour")}`);
+    sunriseMessage = `${t("weatherResult.complmentMessageInSunriseSunset", {
+      hour: positiveHowLongAgoSunrise,
+      hourOrhours: valueHoursOrhour,
+    })}`;
   } else {
     howLongAgoSunrise && howLongAgoSunrise > 1
-      ? (complementSunrise = `${t("weatherResult.hours")}`)
-      : (complementSunrise = `${t("weatherResult.hour")}`);
-    sunriseMessage = ` ${t(
-      "weatherResult.ago"
-    )} ${howLongAgoSunrise} ${complementSunrise}`;
+      ? (valueHoursOrhour = `${t("weatherResult.hours")}`)
+      : (valueHoursOrhour = `${t("weatherResult.hour")}`);
+    sunriseMessage = `${t("weatherResult.complmentMessageAgoSunriseSunset", {
+      hour: howLongAgoSunrise,
+      hourOrhours: valueHoursOrhour,
+    })}`;
+  }
+
+  /* SUNSETE MESSAGE */
+  let sunsetMessage;
+
+  if (howLongDoesSunset && Math.sign(howLongDoesSunset) === -1) {
+    const positiveHowLongDoesSunset = howLongDoesSunset * -1;
+    positiveHowLongDoesSunset > 1
+      ? (valueHoursOrhour = `${t("weatherResult.hours")}`)
+      : (valueHoursOrhour = `${t("weatherResult.hour")}`);
+    sunsetMessage = `${t("weatherResult.complmentMessageAgoSunriseSunset", {
+      hour: positiveHowLongDoesSunset,
+      hourOrhours: valueHoursOrhour,
+    })}`;
+  } else {
+    howLongDoesSunset && howLongDoesSunset > 1
+      ? (valueHoursOrhour = `${t("weatherResult.hours")}`)
+      : (valueHoursOrhour = `${t("weatherResult.hour")}`);
+    sunsetMessage = `${t("weatherResult.complmentMessageInSunriseSunset", {
+      hour: howLongDoesSunset,
+      hourOrhours: valueHoursOrhour,
+    })}`;
+    //sunsetMessage = `en ${howLongDoesSunset} ${valueHoursOrhour}`;
   }
 
   return (
