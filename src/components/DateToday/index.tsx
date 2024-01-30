@@ -10,8 +10,8 @@ import {
 } from "../../redux/slices/weatherDataSlice";
 
 function DateToday() {
-  // eslint-disable-next-line
-  const [t, i18n] = useTranslation("global");
+  //eslint-disable-next-line  @typescript-eslint/no-unused-vars
+  const [_, i18n] = useTranslation("global");
   const EStranslations = useAppSelector(
     (state) => state.weatherData.isESTranslation
   );
