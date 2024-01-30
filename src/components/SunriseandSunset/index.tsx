@@ -14,6 +14,7 @@ function SunriseandSunset() {
   const getSunsete = useAppSelector(
     (state) => state.weatherData.cityData.sys.sunset
   );
+
   const loading = useAppSelector((state) => state.weatherData.loading);
 
   const timeSunrise =

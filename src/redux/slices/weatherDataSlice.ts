@@ -52,7 +52,7 @@ const initialState: IWeatherApp = {
       speed: null
     },
   },
-  isFahrenheitTrue: true,
+  isFahrenheitTrue: false,
   isESTranslation: true,
   loading: true
 }

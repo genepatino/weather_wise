@@ -29,28 +29,36 @@ function Temperature() {
     <TemperaturePercentage>
       <h3>{t("weatherResult.rain-change-bar")}</h3>
       <HourPercentContainer percentage={rainShiftBar1}>
-        <span>{randomHour1 > 12 ? randomHour1 + " PM" : " AM"}</span>
+        <span>
+          {randomHour1 > 12 ? randomHour1 + " PM" : randomHour1 + " AM"}
+        </span>
         <div>
           <div></div>
         </div>
         <span>{rainShiftBar1}%</span>
       </HourPercentContainer>
       <HourPercentContainer percentage={rainShiftBar2}>
-        <span>{randomHour2 > 12 ? randomHour2 + " PM" : " AM"}</span>
+        <span>
+          {randomHour2 > 12 ? randomHour2 + " PM" : randomHour2 + " AM"}
+        </span>
         <div>
           <div></div>
         </div>
         <span>{rainShiftBar2}%</span>
       </HourPercentContainer>
       <HourPercentContainer percentage={rainShiftBar3}>
-        <span>{randomHour3 > 12 ? randomHour3 + " PM" : " AM"}</span>
+        <span>
+          {randomHour3 > 12 ? randomHour3 + " PM" : randomHour3 + " AM"}
+        </span>
         <div>
           <div></div>
         </div>
         <span>{rainShiftBar3}%</span>
       </HourPercentContainer>
       <HourPercentContainer percentage={rainShiftBar4}>
-        <span>{randomHour4 > 12 ? randomHour4 + " PM" : " AM"}</span>
+        <span>
+          {randomHour4 > 12 ? randomHour4 + " PM" : randomHour4 + " AM"}
+        </span>
         <div>
           <div></div>
         </div>

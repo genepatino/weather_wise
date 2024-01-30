@@ -39,7 +39,7 @@ export const DateContainer = styled.header`
     position: absolute;
     left: 6px;
     top: 4px;
-    color: white;
+    color: #173660;
   }
 
   .temperatureButton {

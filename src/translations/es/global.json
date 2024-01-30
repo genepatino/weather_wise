@@ -1,5 +1,6 @@
 {
   "weatherResult": {
+    "placeholder":"Buscar ciudad",
     "rain-change-bar": "Variación de lluvia",
     "sunrise-sunset": "Amanecer y Atardecer",
     "sunrise": "Amanecer",
@@ -11,7 +12,8 @@
     "message-error": {
       "first": "No hemos encontrado una ciudad",
       "second": "que coincida con tu búsqueda."
-    }
+    },
+    "APIRequestFailure":"Se produjeron errores al realizar la búsqueda."
     
   },
 

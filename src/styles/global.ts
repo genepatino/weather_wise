@@ -34,8 +34,7 @@ export const GlobalStyle = createGlobalStyle`
       align-items: center;
 
       @media (min-width: 930px) {
-        width: 100vw;
-        height: 100vh;
+        margin:63px auto
       }
   };
 

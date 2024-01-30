@@ -37,6 +37,31 @@ export const FormSelectCity = styled.form<{
     left: 10px;
     color: grey;
   }
+  .loader {
+    position: absolute;
+    right: 8px;
+    width: 36px;
+    top: 12px;
+    aspect-ratio: 2;
+    --_g: no-repeat radial-gradient(circle closest-side, #3c4795 90%, #0000);
+    background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+    background-size: calc(100% / 3) 50%;
+    animation: l3 1s infinite linear;
+    @keyframes l3 {
+      20% {
+        background-position: 0% 0%, 50% 50%, 100% 50%;
+      }
+      40% {
+        background-position: 0% 100%, 50% 0%, 100% 50%;
+      }
+      60% {
+        background-position: 0% 50%, 50% 100%, 100% 0%;
+      }
+      80% {
+        background-position: 0% 50%, 50% 50%, 100% 100%;
+      }
+    }
+  }
 `;
 
 export const RenderAllCitiesBySearch = styled.div<{
@@ -52,6 +77,9 @@ export const RenderAllCitiesBySearch = styled.div<{
   display: ${(prosp) => (prosp.$displayCitiesContainer ? "flex" : "none")};
   flex-direction: column;
   gap: 8px;
+  @media (min-width: 930px) {
+    width: 255px;
+  }
 
   ul {
     list-style: none;
@@ -69,11 +97,12 @@ export const RenderAllCitiesBySearch = styled.div<{
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       font-size: 1.4rem;
-      padding: 10px 0;
-      padding-left: 38px;
+      padding: 10px 38px;
+      gap: 10px;
 
-      :nth-child(3) {
-        justify-self: center;
+      :nth-child(3),
+      :nth-child(2) {
+        justify-self: end;
       }
 
       &:hover {

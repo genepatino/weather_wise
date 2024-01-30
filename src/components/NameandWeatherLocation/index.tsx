@@ -15,8 +15,8 @@ function NameandWeatherLocation() {
   let temperature;
   if (temperatureInKelvin > 0) {
     temperature = metricUnitOfTemperature
-      ? `${(temperatureInKelvin - 273.15).toFixed()}ºC`
-      : `${(((temperatureInKelvin - 273.15) * 9) / 5 + 32).toFixed()}ºF`;
+      ? `${(((temperatureInKelvin - 273.15) * 9) / 5 + 32).toFixed()}ºF`
+      : `${(temperatureInKelvin - 273.15).toFixed()}ºC`;
   }
 
   const currenTime = new Date().toTimeString().slice(0, 5);

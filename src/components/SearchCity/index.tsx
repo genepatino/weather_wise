@@ -4,7 +4,8 @@ import { FormSelectCity, RenderAllCitiesBySearch } from "./styled";
 import { RiSearch2Line } from "react-icons/ri";
 import { saveCity, setLoadingFalse } from "../../redux/slices/weatherDataSlice";
 import { MessageError } from "../MessageError";
-import { STORAGECITYDATA } from "../../utils/consts";
+import { STORAGECITYDATA } from "../../utils/constants";
+import { useTranslation } from "react-i18next";
 import {
   API_URL_GEO_CITIES,
   API_WEATHER,
@@ -12,7 +13,7 @@ import {
   API_KEY,
 } from "../../services/getCities";
 
-interface ICities {
+interface ICity {
   id: number;
   city: string;
   region: string;
@@ -22,12 +23,15 @@ interface ICities {
 }
 
 function SearchCity() {
+  const [t] = useTranslation("global");
   const [search, setSearch] = useState("");
-  const [cityEnteredByUser, setCityEnteredByUser] = useState<ICities[]>([]);
+  const [loader, setLoader] = useState(false);
+  const [selectedCity, setSelectedCity] = useState<ICity[]>([]);
   const [showCitiesContainer, setShowCitiesContainer] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
   const dispatch = useAppDispatch();
 
+  /* GET USER IP */
   const getUserLocationByIP = async () => {
     const reponse = await fetch("https://api.ipify.org?format=json");
     const data = await reponse.json();
@@ -54,8 +58,10 @@ function SearchCity() {
     dispatch(setLoadingFalse());
   }, []);
 
+  /* GET CITIES THAT MATCH THE CITY ENTERED BY THE USER */
   const getCity = async () => {
     if (search !== "") {
+      setLoader(true);
       try {
         const response = await fetch(
           `${API_URL_GEO_CITIES}/cities?minPopulation=50000&namePrefix=${search}`,
@@ -63,27 +69,32 @@ function SearchCity() {
         );
         const data = await response.json();
         if (data.data.length > 0) {
-          setCityEnteredByUser(data.data);
+          setSelectedCity(data.data);
           setShowCitiesContainer(true);
           setErrorMessage(false);
         } else {
           setErrorMessage(true);
         }
       } catch (error) {
-        console.log("no se ha podido realizar la consulta");
+        alert(t("weatherResult.APIRequestFailure"));
+      } finally {
+        setLoader(false);
       }
+    } else {
+      setShowCitiesContainer(false);
     }
   };
 
   useEffect(() => {
     const getData = setTimeout(() => {
       getCity();
-    }, 900);
+    }, 600);
 
     return () => clearTimeout(getData);
   }, [search]);
 
-  const handleSearchCity = async (city: ICities) => {
+  /* GET INFORMATION ABOUT THE SELECTED CITY */
+  const handleSearchCity = async (city: ICity) => {
     try {
       const response = await fetch(
         `${API_WEATHER}?lat=${city.latitude}&lon=${city.longitude}&appid=${API_KEY}`
@@ -93,7 +104,7 @@ function SearchCity() {
       setShowCitiesContainer(false);
       window.localStorage.setItem(STORAGECITYDATA, JSON.stringify(data));
     } catch (error) {
-      console.log("no se ha podido realizar la consulta");
+      alert(t("weatherResult.APIRequestFailure"));
     }
   };
 
@@ -105,17 +116,18 @@ function SearchCity() {
       >
         <input
           type="text"
-          placeholder="Bogotá"
+          placeholder={t("weatherResult.placeholder")}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
         <RiSearch2Line className="icon-search" />
+        {loader && <div className="loader"></div>}
       </FormSelectCity>
       {errorMessage && <MessageError />}
-      {cityEnteredByUser.length > 0 && (
+      {selectedCity.length > 0 && (
         <RenderAllCitiesBySearch $displayCitiesContainer={showCitiesContainer}>
           <ul>
-            {cityEnteredByUser.map((city) => (
+            {selectedCity.map((city) => (
               <li
                 key={city.id}
                 className="list-container"

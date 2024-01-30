@@ -17,12 +17,8 @@ function DateToday() {
   );
   const dispatch = useAppDispatch();
 
-  const changeLanguageEStoEN = () => {
-    dispatch(modifyModeTranslation()), i18n.changeLanguage("en");
-  };
-
-  const changeLanguageENtoES = () => {
-    dispatch(modifyModeTranslation()), i18n.changeLanguage("es");
+  const changeLanguage = (format: string) => {
+    dispatch(modifyModeTranslation()), i18n.changeLanguage(format);
   };
 
   const metricUnitOfTemperature = useAppSelector(
@@ -50,9 +46,10 @@ function DateToday() {
           <Switch
             onChange={handleChange}
             checked={metricUnitOfTemperature}
-            onColor="#295b89"
+            onColor="#bcc3cc"
             offColor="#bcc3cc"
             offHandleColor="#295b89"
+            onHandleColor="#295b89"
             uncheckedIcon={<RiFahrenheitLine className="fahrenheitIcon" />}
             checkedIcon={<RiCelsiusLine className="celsiusIcon" />}
             width={60}
@@ -61,13 +58,13 @@ function DateToday() {
         <div className="containerButtonTranslate">
           <ButtonTranslate
             active={EStranslations.toString()}
-            onClick={changeLanguageENtoES}
+            onClick={() => changeLanguage("es")}
           >
             ES
           </ButtonTranslate>
           <ButtonTranslate
             active={(!EStranslations).toString()}
-            onClick={changeLanguageEStoEN}
+            onClick={() => changeLanguage("en")}
           >
             EN
           </ButtonTranslate>

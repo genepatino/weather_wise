@@ -1,5 +1,6 @@
 {
   "weatherResult": {
+    "placeholder":"Search city",
     "rain-change-bar": "Rain variation",
     "sunrise-sunset": "Sunrise and Sunset",
     "sunrise": "Sunrise",
@@ -11,7 +12,8 @@
     "message-error": {
       "first": "We haven't found a city",
       "second": "that matches your search."
-    }
+    },
+    "APIRequestFailure":"Errors occurred when performing the search."
   },
 
   "weatherDetails":{
