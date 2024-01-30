@@ -1,5 +1,28 @@
 {
-  "header": {
-    "hello-world": "Hola mundo"
+  "weatherResult": {
+    "placeholder":"Buscar ciudad",
+    "rain-change-bar": "Variación de lluvia",
+    "sunrise-sunset": "Amanecer y Atardecer",
+    "sunrise": "Amanecer",
+    "sunset": "Atardecer",
+    "hour": "hora",
+    "hours": "horas",
+    "complmentMessageInSunriseSunset": "en {{hour}} {{hourOrhours}}",
+    "complmentMessageAgoSunriseSunset": "hace {{hour}} {{hourOrhours}}",
+    "message-error": {
+      "first": "No hemos encontrado una ciudad",
+      "second": "que coincida con tu búsqueda."
+    },
+    "APIRequestFailure":"Se produjeron errores al realizar la búsqueda."
+    
+  },
+
+  "weatherDetails":{
+    "today-overview": "Resumen de hoy",
+    "wind-speed": "Velocidad del viento",
+    "pressure": "Presión",
+    "rain-chance": "Probabilidad de lluvia",
+    "humidity": "Humedad",
+    "hourly-forecast": "Pronóstico por hora"
   }
 }

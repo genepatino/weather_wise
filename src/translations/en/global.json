@@ -1,5 +1,27 @@
 {
-  "header": {
-    "hello-world": "Hello world"
+  "weatherResult": {
+    "placeholder":"Search city",
+    "rain-change-bar": "Rain variation",
+    "sunrise-sunset": "Sunrise and Sunset",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "hour": "hour",
+    "hours": "hours",
+    "complmentMessageInSunriseSunset": "in {{hour}} {{hourOrhours}}",
+    "complmentMessageAgoSunriseSunset": "{{hour}} {{hourOrhours}} ago",
+    "message-error": {
+      "first": "We haven't found a city",
+      "second": "that matches your search."
+    },
+    "APIRequestFailure":"Errors occurred when performing the search."
+  },
+
+  "weatherDetails":{
+    "today-overview": "Today's Overview",
+    "wind-speed": "Wind speed",
+    "pressure": "Pressure",
+    "rain-chance": "Rain chance",
+    "humidity": "Humidity",
+    "hourly-forecast": "Hourly Forecast"
   }
 }
