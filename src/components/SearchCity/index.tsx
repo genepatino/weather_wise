@@ -129,7 +129,7 @@ function SearchCity() {
   };
 
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <FormSelectCity
         $displayCitiesContainer={showCitiesContainer}
         onSubmit={(e) => e.preventDefault()}

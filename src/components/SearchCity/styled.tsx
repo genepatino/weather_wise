@@ -69,8 +69,7 @@ export const RenderAllCitiesBySearch = styled.div<{
 }>`
   background-color: white;
   z-index: 2;
-  position: relative;
-  top: -4px;
+  position: absolute;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   padding-bottom: 10px;
@@ -89,7 +88,7 @@ export const RenderAllCitiesBySearch = styled.div<{
     padding: 0;
     margin: 0;
     font-size: 1.3rem;
-    height: 50px;
+    height: 70px;
     overflow-y: auto;
     cursor: pointer;
 
