@@ -78,12 +78,14 @@ function SearchCity() {
 
   /* GET CITIES THAT MATCH THE CITY ENTERED BY THE USER */
   const getCity = async () => {
+    const controller = new AbortController();
     if (search !== "") {
       setLoader(true);
       try {
         const response = await fetch(
           `${API_URL_GEO_CITIES}/cities?minPopulation=50000&namePrefix=${search}`,
-          GEO_Options
+          GEO_Options,
+          { signal: controller.signal }
         );
         const data = await response.json();
         if (data.data.length > 0) {
@@ -95,6 +97,7 @@ function SearchCity() {
           setShowCitiesContainer(false);
         }
       } catch (error) {
+        if (error === "Aborterror") return "cancelada la solicitud";
         alert(t("weatherResult.APIRequestFailure"));
       } finally {
         setLoader(false);
@@ -103,12 +106,13 @@ function SearchCity() {
       setShowCitiesContainer(false);
       setErrorMessage(false);
     }
+    return () => controller.abort();
   };
 
   useEffect(() => {
     const getData = setTimeout(() => {
       getCity();
-    }, 1010);
+    }, 1000);
 
     return () => clearTimeout(getData);
   }, [search]);
