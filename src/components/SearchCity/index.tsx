@@ -33,29 +33,42 @@ function SearchCity() {
 
   /* GET USER IP */
   const getUserLocationByIP = async () => {
-    const reponse = await fetch("https://api.ipify.org?format=json");
-    const data = await reponse.json();
-    const { ip } = data;
+    try {
+      const request = await fetch("https://api.ipify.org?format=json");
+      const response = await request.json();
+      const { ip } = response;
 
-    fetch(`http://ip-api.com/json/${ip}?fields=status,message,lat,lon`)
-      .then((response) => response.json())
-      .then((data) => {
-        const { lat, lon } = data;
+      if (ip.length > 0) {
+        const request = await fetch(
+          `https://ipinfo.io/${ip}?token=8faa97657e5d6d`
+        );
+        const jsonResponse = await request.json();
+        const data = jsonResponse.loc.split(",");
+        const lat = data[0];
+        const lon = data[1];
+
         fetch(`${API_WEATHER}?lat=${lat}&lon=${lon}&appid=${API_KEY}`)
           .then((response) => response.json())
           .then((locationByIP) => {
             dispatch(saveCity(locationByIP));
           });
-      });
+
+        dispatch(setLoadingFalse());
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
     const cityDatasavedInSstorage =
       window.localStorage.getItem(STORAGECITYDATA);
-    cityDatasavedInSstorage
-      ? dispatch(saveCity(JSON.parse(cityDatasavedInSstorage)))
-      : getUserLocationByIP();
-    dispatch(setLoadingFalse());
+    if (cityDatasavedInSstorage) {
+      dispatch(saveCity(JSON.parse(cityDatasavedInSstorage)));
+      dispatch(setLoadingFalse());
+    } else {
+      getUserLocationByIP();
+    }
   }, []);
 
   /* GET CITIES THAT MATCH THE CITY ENTERED BY THE USER */
