@@ -51,14 +51,13 @@ function SearchCity() {
               .then((response) => response.json())
               .then((locationByIP) => {
                 dispatch(saveCity(locationByIP));
+                dispatch(setLoadingFalse());
                 window.localStorage.setItem(
                   STORAGECITYDATA,
                   JSON.stringify(locationByIP)
                 );
               });
           });
-
-        dispatch(setLoadingFalse());
       }
     } catch (error) {
       console.error(error);
