@@ -67,6 +67,7 @@ export const FormSelectCity = styled.form<{
 export const RenderAllCitiesBySearch = styled.div<{
   $displayCitiesContainer: boolean;
 }>`
+  width: 100%;
   background-color: white;
   z-index: 2;
   position: absolute;
