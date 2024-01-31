@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../redux/hooks";
-import { FormSelectCity, RenderAllCitiesBySearch } from "./styled";
+import {
+  FormSelectCity,
+  RenderAllCitiesBySearch,
+  FormContainer,
+} from "./styled";
 import { RiSearch2Line } from "react-icons/ri";
 import { saveCity, setLoadingFalse } from "../../redux/slices/weatherDataSlice";
 import { MessageError } from "../MessageError";
@@ -77,14 +81,12 @@ function SearchCity() {
 
   /* GET CITIES THAT MATCH THE CITY ENTERED BY THE USER */
   const getCity = async () => {
-    const controller = new AbortController();
     if (search !== "") {
       setLoader(true);
       try {
         const response = await fetch(
           `${API_URL_GEO_CITIES}/cities?minPopulation=50000&namePrefix=${search}`,
-          GEO_Options,
-          { signal: controller.signal }
+          GEO_Options
         );
         const data = await response.json();
         if (data.data.length > 0) {
@@ -105,7 +107,6 @@ function SearchCity() {
       setShowCitiesContainer(false);
       setErrorMessage(false);
     }
-    return () => controller.abort();
   };
 
   useEffect(() => {
@@ -132,7 +133,7 @@ function SearchCity() {
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <FormContainer>
       <FormSelectCity
         $displayCitiesContainer={showCitiesContainer}
         onSubmit={(e) => e.preventDefault()}
@@ -164,7 +165,7 @@ function SearchCity() {
           </ul>
         </RenderAllCitiesBySearch>
       )}
-    </div>
+    </FormContainer>
   );
 }
 

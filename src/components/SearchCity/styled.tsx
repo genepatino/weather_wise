@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+export const FormContainer = styled.div`
+  position: relative;
+  width: 100%;
+  @media (min-width: 930px) {
+    width: 255px;
+  }
+`;
+
 export const FormSelectCity = styled.form<{
   $displayCitiesContainer?: boolean;
 }>`
@@ -77,9 +85,6 @@ export const RenderAllCitiesBySearch = styled.div<{
   display: ${(prosp) => (prosp.$displayCitiesContainer ? "flex" : "none")};
   flex-direction: column;
   gap: 8px;
-  @media (min-width: 930px) {
-    width: 255px;
-  }
 
   ul {
     list-style: none;
