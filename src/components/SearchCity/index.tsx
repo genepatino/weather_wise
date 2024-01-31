@@ -39,18 +39,23 @@ function SearchCity() {
       const { ip } = response;
 
       if (ip.length > 0) {
-        const request = await fetch(
-          `https://ipinfo.io/${ip}?token=8faa97657e5d6d`
-        );
-        const jsonResponse = await request.json();
-        const data = jsonResponse.loc.split(",");
-        const lat = data[0];
-        const lon = data[1];
-
-        fetch(`${API_WEATHER}?lat=${lat}&lon=${lon}&appid=${API_KEY}`)
+        fetch(`https://ipinfo.io/${ip}?token=8faa97657e5d6d`)
           .then((response) => response.json())
-          .then((locationByIP) => {
-            dispatch(saveCity(locationByIP));
+          .then((jsonResponse) => {
+            const location = jsonResponse.loc.split(",");
+
+            const lat = location[0];
+            const lon = location[1];
+
+            fetch(`${API_WEATHER}?lat=${lat}&lon=${lon}&appid=${API_KEY}`)
+              .then((response) => response.json())
+              .then((locationByIP) => {
+                dispatch(saveCity(locationByIP));
+                window.localStorage.setItem(
+                  STORAGECITYDATA,
+                  JSON.stringify(locationByIP)
+                );
+              });
           });
 
         dispatch(setLoadingFalse());
@@ -87,6 +92,7 @@ function SearchCity() {
           setErrorMessage(false);
         } else {
           setErrorMessage(true);
+          setShowCitiesContainer(false);
         }
       } catch (error) {
         alert(t("weatherResult.APIRequestFailure"));
@@ -95,13 +101,14 @@ function SearchCity() {
       }
     } else {
       setShowCitiesContainer(false);
+      setErrorMessage(false);
     }
   };
 
   useEffect(() => {
     const getData = setTimeout(() => {
       getCity();
-    }, 600);
+    }, 1010);
 
     return () => clearTimeout(getData);
   }, [search]);
