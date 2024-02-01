@@ -28,10 +28,13 @@
   <li> Traducciones.</li>
 </ul>
 
-https://github.com/genepatino/weather_wise/assets/62777013/e739b0ae-4380-4859-a2db-0825659ebc88
+https://github.com/genepatino/weather_wise/assets/62777013/57298b66-8bcd-438f-b3b4-b8f700f5a91b
 
 <p><em>Gracias por mirar🌸</em></p>
 
 <h3>Créditos por diseño a:</h3><p>Syahrul Falah, Tegal Indonesia</p>
 <h3>Autora:</h3><p>Génesis Patiño</p>
 <img src="src/images/avatar.png" alt="avatar github genepatino" width="120" height="120"></img>
+
+
+
