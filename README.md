@@ -23,11 +23,12 @@
 <h3>WeatherWise cuenta con distintas funcionalides y características:</h3>
 
 <ul>
-  <li> Es mobile first.</li>
-  <li> Estado de carga (Loading Skeleton e input loader).</li>
-  <li> Consultas a una API.</li>
-  <li> Cambio de unidades métricas.</li>
-  <li> Traducciones.</li>
+   <li> Es mobile first.</li>
+   <li>Fecha actual</li>
+   <li> Estado de carga (Loading Skeleton e input loader).</li>
+   <li> Consultas a una API.</li>
+   <li> Cambio de unidades métricas.</li>
+   <li> Traducciones.</li>
 </ul>
 
 https://github.com/genepatino/weather_wise/assets/62777013/57298b66-8bcd-438f-b3b4-b8f700f5a91b
