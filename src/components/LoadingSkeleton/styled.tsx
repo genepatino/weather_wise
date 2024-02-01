@@ -5,6 +5,7 @@ export const Skeleton = styled.div`
   display: flex;
   flex-direction: column;
   gap: 14px;
+  width: 100%;
 
   .skeleton {
     animation: skeleton-loading 1s linear infinite alternate;

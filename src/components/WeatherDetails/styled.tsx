@@ -6,4 +6,8 @@ export const MainContainer = styled.main`
   display: flex;
   flex-direction: column;
   gap: 30px;
+
+  @media (min-width: 930px) {
+    width: 705px;
+  }
 `;
