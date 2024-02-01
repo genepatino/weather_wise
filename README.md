@@ -1,5 +1,5 @@
 <h1 align="center"><em>WeatherWise</em></h1>
-<img src="src/images/weatherwiseImage.png" alt="avatar github genepatino" width="120" height="120"></img>
+<img src="src/images/weatherwiseImage.png" alt="imagen de weather wise"></img>
 
 <p align="center">
    <img src="https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white">
@@ -35,6 +35,3 @@ https://github.com/genepatino/weather_wise/assets/62777013/57298b66-8bcd-438f-b3
 <h3>Créditos por diseño a:</h3><p>Syahrul Falah, Tegal Indonesia</p>
 <h3>Autora:</h3><p>Génesis Patiño</p>
 <img src="src/images/avatar.png" alt="avatar github genepatino" width="120" height="120"></img>
-
-
-
