@@ -34,4 +34,4 @@ https://github.com/genepatino/weather_wise/assets/62777013/e739b0ae-4380-4859-a2
 
 <h3>Créditos por diseño a:</h3><p>Syahrul Falah, Tegal Indonesia</p>
 <h3>Autora:</h3><p>Génesis Patiño</p>
-<img src="src/images/genesisgithub.jpg" alt="avatar github genepatino" width="120" height="120"></img>
+<img src="src/images/avatar.png" alt="avatar github genepatino" width="120" height="120"></img>
