@@ -13,30 +13,30 @@
    <img src="https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7">
    <img src="https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white">
 </p>
-<h2>Introducción</h2>
+<h2>Introduction</h2>
 
-<p>WeatherWise es una app del clima que inicialmente mostrará un estado de carga, mientras verifica si en el Local Storage existe o no información guardada previamente. De no ser asi, accede a la ubicación del usuario para poder mostrar los detalles climatológicos de su ciudad. El usuario podrá cambiar las unidades métricas de temperatura a través de un Switch (en un principio, será mostrada en ºC), así como también, el idioma de la aplicación (español, por defecto) haciendo uso de dos botones ("ES", "EN"). Se mostrará un mensaje de advertencia, en caso, de que la información ingresada por el usuario no coincida con una ciudad, o que no cumpla con la cantidad mínima de habitantes (ciudad: ​a partir de 50.000 habitantes). Los datos de la ciudad ingresada por el usuario, serán almecenados en el localStorage para la persistencia de datos.<p>
+<p>WeatherWise is a weather app that will initially show a charging status, while verifying whether or not previously saved information exists in the Local Storage. If not, it accesses the user's location to show the weather details of their city. The user will be able to change the metric temperature units through a Switch (initially, it will be displayed in ºC), as well as the language of the application (Spanish, by default) using two buttons ("ES", "IN"). A warning message will be displayed in case the information entered by the user does not match a city, or does not meet the minimum number of inhabitants (city: from 50,000 inhabitants). The city data entered by the user will be stored in the localStorage for data persistence.<p>
 
-<p>Inicialmente verá un input en el que debe ingresar una ciudad, éste input cuenta con un <em>debounce</em> que espera 1 seg antes de hacer la consulta a la API.</p>
-<p>En la sección de barras de "Variación de lluvia, y la card de "Probabilidad de lluvia", se implementó la función Math.random(), ya qué no eran datos enviados por la API; así como también, la imagen de gráfica de temperatura.</p>
+<p>Initially you will see an input in which you must enter a city, this input has a <em>debounce</em> that waits 1 sec before making the query to the API.</p>
+<p>In the "Rain Variation" bar section, and the "Rain Probability" card, the Math.random() function was implemented, since it was not data sent by the API; as well as the image temperature graph.</p>
 
-<h3>WeatherWise cuenta con distintas funcionalides y características:</h3>
+<h3>WeatherWise has different functionalities and features:</h3>
 
 <ul>
-   <li> Es mobile first.</li>
-   <li>Fecha actual</li>
-   <li> Estado de carga (Loading Skeleton e input loader).</li>
-   <li> Consultas a una API.</li>
-   <li> Cambio de unidades métricas.</li>
-   <li> Traducciones.</li>
+    <li>It's mobile first.</li>
+    <li>Current date</li>
+    <li>Loading status (Loading Skeleton and input loader).</li>
+    <li>Queries to an API.</li>
+    <li>Change of metric units.</li>
+    <li>Translations.</li>
 </ul>
 
 https://github.com/genepatino/weather_wise/assets/62777013/57298b66-8bcd-438f-b3b4-b8f700f5a91b
 
-<p>A su derecha, en la sección About, encontrará el link de la aplicación.</p>
+<p>On your right, in the About section, you will find the link to the application.</p>
 
-<p><em>Gracias por mirar🌸</em></p>
+<p><em>Thank you for watching🌸</em></p>
 
-<h3>Créditos por diseño a:</h3><p>Syahrul Falah, Tegal Indonesia</p>
-<h3>Autora:</h3><p>Génesis Patiño</p>
+<h3>Design credits to:</h3><p>Syahrul Falah, Tegal Indonesia</p>
+<h3>Author:</h3><p>Génesis Patiño</p>
 <img src="src/images/avatar.png" alt="avatar github genepatino" width="120" height="120"></img>
