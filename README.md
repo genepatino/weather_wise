@@ -33,6 +33,8 @@
 
 https://github.com/genepatino/weather_wise/assets/62777013/57298b66-8bcd-438f-b3b4-b8f700f5a91b
 
+<p>A su derecha, en la sección About, encontrará el link de la aplicación.</p>
+
 <p><em>Gracias por mirar🌸</em></p>
 
 <h3>Créditos por diseño a:</h3><p>Syahrul Falah, Tegal Indonesia</p>
